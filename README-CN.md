@@ -47,6 +47,9 @@ cd mesa
 git checkout -f mesa-25.0.7 -b 25.0.7
 # 如需wayland后端支持，设置-Dplatforms=x11,wayland
 meson build -Dvulkan-drivers=panfrost -Dgallium-drivers=panfrost -Dplatforms=x11 -Dglx=auto -Dprefix=/usr/local
+
+meson build -Dvulkan-drivers=panfrost,swrast -Dgallium-drivers=panfrost,llvmpipe -Dplatforms=x11,wayland -Dglx=auto -Degl=enabled -Dgbm=enabled -Dllvm=enabled -Degl-native-platform=auto -Dgles2=enabled -Dlegacy-x11=dri2 -Dprefix=/usr/local
+
 sudo ninja -C build install
 echo "/usr/local/lib" > /etc/ld.so.conf.d/00-aarch64-mesa.conf
 ldconfig
